@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:auth/auth", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 //App setup
 app.use(morgan("combined"));
