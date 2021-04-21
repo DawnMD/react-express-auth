@@ -9,7 +9,9 @@ import reduxThunk from "redux-thunk";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancedStore = createStore(
   reducers,
-  {},
+  {
+    auth: { authenticated: localStorage.getItem("token") },
+  },
   composeEnhancers(applyMiddleware(reduxThunk))
 );
 ReactDOM.render(
