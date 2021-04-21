@@ -6,7 +6,9 @@ import { signup } from "../../actions";
 
 class Signup extends Component {
   onSubmit = (formProps) => {
-    this.props.signup(formProps);
+    this.props.signup(formProps, () => {
+      this.props.history.push("/feature");
+    });
   };
   render() {
     return (
@@ -29,13 +31,17 @@ class Signup extends Component {
             autoComplete="off"
           />
         </fieldset>
+        <div>{this.props.errorMessage}</div>
         <button>Sign Up</button>
       </form>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return { errorMessage: state.auth.errorMessage };
+};
 export default compose(
-  connect(null, { signup }),
+  connect(mapStateToProps, { signup }),
   reduxForm({
     form: "signup",
   })
